@@ -1,1 +1,2 @@
 User-agent: *
+Sitemap: https://valignatev.com/sitemap.xml
