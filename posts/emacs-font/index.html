@@ -141,7 +141,7 @@ reset the font size functions:</p>
   <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
   <span class="p">(</span><span class="nv">set-frame-font-size</span> <span class="p">(</span><span class="nf">-</span> <span class="nv">my-font-size</span> <span class="mi">1</span><span class="p">)))</span>
 
-<span class="p">(</span><span class="nb">defun</span> <span class="nv">adjust-frame-font</span> <span class="p">()</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">reset-frame-font</span> <span class="p">()</span>
   <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
   <span class="p">(</span><span class="nv">set-frame-font-size</span><span class="p">))</span></code></pre></div>
 <p>Note the <code>(interactive)</code>, so we can call these functions with <code>M-x</code>
@@ -159,7 +159,7 @@ exercise for you.</p>
 
 <span class="p">(</span><span class="nb">defun</span> <span class="nv">set-frame-font-size</span> <span class="p">(</span><span class="kp">&amp;optional</span> <span class="nv">font-size</span><span class="p">)</span>
   <span class="s">&#34;Change frame font size to FONT-SIZE.
-</span><span class="s">If no FONT-SIZE provided, adjust the size to its default variable.&#34;</span>
+</span><span class="s">If no FONT-SIZE provided, reset the size to its default variable.&#34;</span>
   <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">font-size</span>
      <span class="p">(</span><span class="nb">or</span> <span class="nv">font-size</span>
        <span class="p">(</span><span class="nf">car</span> <span class="p">(</span><span class="nf">get</span> <span class="ss">&#39;my-font-size</span> <span class="ss">&#39;standard-value</span><span class="p">)))))</span>
@@ -177,7 +177,7 @@ exercise for you.</p>
   <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
   <span class="p">(</span><span class="nv">set-frame-font-size</span> <span class="p">(</span><span class="nf">-</span> <span class="nv">my-font-size</span> <span class="mi">1</span><span class="p">)))</span>
 
-<span class="p">(</span><span class="nb">defun</span> <span class="nv">adjust-frame-font</span> <span class="p">()</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">reset-frame-font</span> <span class="p">()</span>
   <span class="s">&#34;Reset frame font to its default value.&#34;</span>
   <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
   <span class="p">(</span><span class="nv">set-frame-font-size</span><span class="p">))</span></code></pre></div>
