@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on The most credible computer media since 1812</title>
+    <link>https://valignatev.com/posts/</link>
+    <description>Recent content in Posts on The most credible computer media since 1812</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>valentignatev@gmail.com (Valentin Ignatev)</managingEditor>
+    <webMaster>valentignatev@gmail.com (Valentin Ignatev)</webMaster>
+    <lastBuildDate>Sun, 16 Dec 2018 15:35:00 +0300</lastBuildDate>
+    
+	<atom:link href="https://valignatev.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>How to change Emacs font with minibuffer together</title>
+      <link>https://valignatev.com/posts/emacs-font/</link>
+      <pubDate>Sun, 16 Dec 2018 15:35:00 +0300</pubDate>
+      <author>valentignatev@gmail.com (Valentin Ignatev)</author>
+      <guid>https://valignatev.com/posts/emacs-font/</guid>
+      <description>&lt;p&gt;I see how people struggle with Emacs font size all the time in
+their live demos. Well, enough is enough!&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
