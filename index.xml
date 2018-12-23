@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>valentignatev@gmail.com (Valentin Ignatev)</managingEditor>
     <webMaster>valentignatev@gmail.com (Valentin Ignatev)</webMaster>
-    <lastBuildDate>Sun, 16 Dec 2018 15:35:00 +0300</lastBuildDate>
+    <lastBuildDate>Mon, 24 Dec 2018 01:45:00 +0300</lastBuildDate>
     
 	<atom:link href="https://valignatev.com/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Open external terminals from Emacs</title>
+      <link>https://valignatev.com/posts/emacs-external-terminal/</link>
+      <pubDate>Mon, 24 Dec 2018 01:45:00 +0300</pubDate>
+      <author>valentignatev@gmail.com (Valentin Ignatev)</author>
+      <guid>https://valignatev.com/posts/emacs-external-terminal/</guid>
+      <description>&lt;p&gt;How to integrate your terminal with Emacs in an quick way and open it based on
+the current project or current working directory.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>How to change Emacs font with minibuffer together</title>
