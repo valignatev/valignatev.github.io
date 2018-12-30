@@ -61,7 +61,7 @@ the current project or current working directory.</p>
 
 <h2 id="quick-note-about-non-linux-oses">Quick note about non-Linux OSes</h2>
 
-<p>The trick I&rsquo;m using applies to Linux only (go, sue me for this). For other
+<p>The trick I'm using applies to Linux only (go, sue me for this). For other
 operating systems check out cool package
 <a href="https://github.com/davidshepherd7/terminal-here" target="_blank">terminal-here</a> (it
 supports Linux as well).</p>
@@ -77,7 +77,7 @@ supports Linux as well).</p>
   <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
   <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">default-directory</span> <span class="p">(</span><span class="nv">projectile-project-root</span><span class="p">)))</span>
     <span class="p">(</span><span class="nv">open-terminal</span><span class="p">)))</span></code></pre></div>
-<p>These two functions are basically it. They&rsquo;ll open the terminal in the
+<p>These two functions are basically it. They'll open the terminal in the
 current working directory (<code>default-directory</code> in Emacs terms) and in
 the project root<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> respectively. If you close Emacs (why would you do
 this?), all terminals will be closed as well. But how does it work?</p>
@@ -91,7 +91,7 @@ bind them to Emacs. It accepts some arguments:</p>
 <li>Process name which we can see in the process list (<code>M-x list-processes</code>).</li>
 <li>Buffer associated with the process (<code>nil</code> means no buffer for the process).</li>
 <li>The actual program to run.</li>
-<li>Arguments for the process we&rsquo;re about to start. We&rsquo;re not using it.</li>
+<li>Arguments for the process we're about to start. We're not using it.</li>
 </ol>
 
 <p>Ok, so in Linux, you can get the default terminal by reading from
@@ -101,15 +101,15 @@ terminal emulator which Emacs will gladly run for us.</p>
 
 <h2 id="changing-default-terminal-directory">Changing default terminal directory</h2>
 
-<p>Often you&rsquo;re editing a file somewhere deep in the project hierarchy,
-but you need the terminal in the project root. Of course, you&rsquo;re using
+<p>Often you're editing a file somewhere deep in the project hierarchy,
+but you need the terminal in the project root. Of course, you're using
 <a href="https://github.com/bbatsov/projectile" target="_blank">projectile</a>, right<sup class="footnote-ref" id="fnref:2"><a href="#fn:2">2</a></sup>? Projectile
 has <code>projectile-run-&lt;X&gt;</code> where <code>&lt;X&gt;</code> is any terminal built
 into Emacs. But we need external one! Luckily,
 <code>(projectile-project-root)</code> gives us the root directory of the
 project. We assign it to the <code>default-directory</code> using <code>let</code> which
 will ensure that our change will stay only during the function
-lifetime, and we don&rsquo;t mess with the whole buffer default directory
+lifetime, and we don't mess with the whole buffer default directory
 which other things might be using.</p>
 
 <h2 id="what-else-can-we-do">What else can we do</h2>
@@ -130,7 +130,7 @@ between embedded terminals and the rest of Emacs is better than
 anything you could get with an external one. However, there are rough
 edges and quirks here and there. External terminals have better TUI
 support, they are faster, often they have better colors and even
-leverage GPU for rendering. It also makes perfect sense if you&rsquo;re
+leverage GPU for rendering. It also makes perfect sense if you're
 using a tiling window manager and rely heavily on having multiple
 terminals laying around. And people
 <a href="https://emacs.stackexchange.com/q/7650/13740" target="_blank">asking</a> for it.</p>
@@ -143,7 +143,7 @@ terminals laying around. And people
 <ol>
 <li id="fn:1">Project root is, for example, the directory where your <code>.git</code> resides.
  <a class="footnote-return" href="#fnref:1"><sup>[return]</sup></a></li>
-<li id="fn:2">There&rsquo;s also <code>vc-root-dir</code> available since Emacs 25.1 out of the box. <code>terminal-here</code> <a href="https://github.com/davidshepherd7/terminal-here/blob/master/terminal-here.el#L151" target="_blank">falls back</a> to it
+<li id="fn:2">There's also <code>vc-root-dir</code> available since Emacs 25.1 out of the box. <code>terminal-here</code> <a href="https://github.com/davidshepherd7/terminal-here/blob/master/terminal-here.el#L151" target="_blank">falls back</a> to it
  <a class="footnote-return" href="#fnref:2"><sup>[return]</sup></a></li>
 </ol>
 </div>

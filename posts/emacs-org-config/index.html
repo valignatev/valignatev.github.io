@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1"/>
+    <meta name="description" content="Read about how I&#39;ve tried to rewrite my Emacs config into a literate style and why I didn&#39;t like it"/>
+    <meta name="keywords" content="editors,emacs,elisp,emacs-lisp,blog,init.el,emacs.d,org-mode"/>
+    <meta name="author" content="Valentin Ignatev"/>
+    <title>How I&#39;m failing literate config in Emacs</title>
+    <link rel="stylesheet" href="https://valignatev.com/sass/main.css">
+  </head>
+  <body>
+    
+    <header class="HeaderCompact">
+  <div class="HeaderCompact-content">
+    <nav>
+      <a href="/" title="HOME">HOME</a>
+    </nav>
+    <div class="Social-header">
+      <ul><li><a href="https://twitter.com/valignatev" title="twitter"><span class="Social-twitter--dark"></span></a></li>
+        <li><a href="https://github.com/valignatev" title="github"><span class="Social-github--dark"></span></a></li>
+        <li><a href="https://stackoverflow.com/users/3606603/valignatev" title="stackoverflow"><span class="Social-stackoverflow--dark"></span></a></li>
+        <li><a href="https://www.youtube.com/channel/UCg0V1MkdYkMlwZPU3IuKLMg" title="youtube"><span class="Social-youtube--dark"></span></a></li>
+        <li><a href="https://twitch.tv/valignatev" title="twitch"><span class="Social-twitch--dark"></span></a></li>
+        <li><a href="https://reddit.com/user/valignatev" title="reddit"><span class="Social-reddit--dark"></span></a></li>
+        <li><a href="mailto:valentignatev@gmail.com" title="email"><span class="Social-email--dark"></span></a></li>
+        </ul>
+    </div>
+  </div>
+</header>
+
+    <main>
+      <div id="content">
+<div class="Post">
+  <section>
+    <article><header class="Post-title">
+  <h1>
+    <a href="https://valignatev.com/posts/emacs-org-config/">How I&#39;m failing literate config in Emacs</a>
+  </h1>
+  <ul class="Post-stats">
+    <li>
+      <span class="Icon-calendar--light"></span>
+      <span>December 30, 2018</span>
+    </li>
+    <li>
+      <span class="Icon-clocks--light"></span>
+      <span>3 minutes read</span>
+    </li>
+  </ul>
+</header>
+<p>My personal experience with the literate config style in Emacs as of the
+end of 2018, and why I think I don't like it.</p>
+
+<a href="/posts/emacs-org-config/emacs-org-config.png">
+  <figure>
+    <img src="/posts/emacs-org-config/emacs-org-config.png" alt="" />
+    <figcaption></figcaption>
+  </figure>
+</a>
+
+
+<h2 id="tldr">TLDR</h2>
+
+<p>To skip all the lyrics and get right to the points click <a href="#things-i-didn-t-like">here</a>.</p>
+
+<h2 id="lyrical-digression-and-necessary-disclaimer">Lyrical digression and necessary disclaimer</h2>
+
+<p>The concept of literate config was attractive to me because when you
+read it, it feels like the actual documentation for some library or
+framework. I mean, pieces of code with exhaustive description around
+it, not just a couple line of comments. Epic examples which inspired
+me to try it out were <a href="https://github.com/sachac/.emacs.d/blob/gh-pages/Sacha.org" target="_blank">Sacha
+Chua's</a>
+and
+<a href="https://github.com/wasamasa/dotemacs/blob/master/init.org" target="_blank">wasamasa's</a>.</p>
+
+<h2 id="the-concept">The concept</h2>
+
+<p>It's simple. You create a file named <code>config.org</code> in your <code>.emacs.d</code>
+directory.  You organize it as you organize any org file, but with a
+bits of elisp like this:</p>
+<div class="highlight"><pre class="chroma"><code class="language-org" data-lang="org"><span class="gh">*</span><span class="gs"> Org-mode heading</span>
+Text describing the code below, your intention etc
+<span class="c">#+BEGIN_SRC </span><span class="cs">emacs-lisp</span><span class="c">
+</span><span class="c"></span>  <span class="p">(</span><span class="nb">defun</span> <span class="nv">some-elisp-code</span> <span class="p">(</span><span class="kp">&amp;optional</span> <span class="nv">params</span><span class="p">)</span> <span class="p">(</span><span class="o">...</span><span class="p">))</span>
+<span class="c">#+END_SRC</span></code></pre></div>
+<p>Then, in your <code>init.el</code> you call</p>
+<div class="highlight"><pre class="chroma"><code class="language-elisp" data-lang="elisp"><span class="p">(</span><span class="nv">org-babel-load-file</span> <span class="p">(</span><span class="nf">concat</span> <span class="nv">user-emacs-directory</span> <span class="s">&#34;config.org&#34;</span><span class="p">))</span></code></pre></div>
+<p>That's it, <code>org-babel-load-file</code> grabs all elisp pieces from your org
+file and put them together into a file called <code>config.el</code>. You can
+find it near the original file.</p>
+
+<p>You put your org config file under the VCS, put it on GitHub which
+renders it properly, you're happy, people give you stars and life
+feels complete. Not even mention that you can export the config to
+HTML and put it on your site
+(<a href="http://pages.sachachua.com/.emacs.d/Sacha.html" target="_blank">Sacha's</a> one, for
+example).</p>
+
+<h2 id="things-i-didn-t-like">Things I didn't like</h2>
+
+<p>First, my unfinished org config is
+<a href="https://github.com/valignatev/dotfiles/blob/literate-config/.emacs.d/config.org" target="_blank">here</a>. Now, to the list:</p>
+
+<ol>
+<li><p>I can't easily navigate elisp from org file. E.g. I can do <kbd>C-h
+f</kbd> and <kbd>C-h v</kbd> over functions and variables, but I
+can't directly go to their definitions with <kbd>M-.</kbd>. Maybe
+<code>xref</code> can be configured the right way, but I haven't got to it.</p></li>
+
+<li><p>I can't edit the code directly in the config file, I have to open
+dedicated buffer with <kbd>C-c '</kbd>. It didn't look like a big
+deal when I've seen somebody else doing that, but it's quite
+cumbersome for me.</p></li>
+
+<li><p>Text, surrounding the code, creates too much noise. It makes config
+harder to navigate, and the code itself doesn't look like the first
+class citizen. I'm not even mentioning <code>#+BEGIN_SRC</code>/<code>#+END_SRC</code>
+stuff (I've just mentioned it actually).</p></li>
+
+<li><p>Surrounding text itself looks redundant to me. I don't do anything
+significantly complex, and when I do, I tend to write comments and
+descriptive commit headers and messages.</p></li>
+
+<li><p>I don't see any benefit for me personally. I see how it's more
+convenient for other people to read and study such config, but I
+don't seem to gain any benefit myself.</p></li>
+</ol>
+
+<h2 id="closing-words">Closing words</h2>
+
+<p>With all that being said, I won't trash this experiment. I'll save it
+under the <a href="https://github.com/valignatev/dotfiles/blob/literate-config/.emacs.d/config.org" target="_blank">dedicated
+branch</a>
+and will back up to my
+<a href="https://github.com/valignatev/dotfiles/blob/5d9d152bf27c300fc21d673dc5290a0073165425/.emacs.d/init.el" target="_blank">main</a>
+config which I'll separate into multiple files, as I would do with
+a regular software project.</p>
+
+<p>Meanwhile, I'd gladly hear what possible advantages of an org style
+config am I missing. Maybe there is something that would outweigh cons
+which are deal-breakers for me now.</p>
+    </article>
+  </section>
+  <section class="Post-comments">
+    <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "valignatev" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+  </section>
+</div>
+
+      </div>
+    </main><footer>
+  <div class="Footer-content">
+    <div class="Social-footer">
+      <ul><li><a href="https://twitter.com/valignatev" title="twitter"><span class="Social-twitter--light"></span></a></li>
+	<li><a href="https://github.com/valignatev" title="github"><span class="Social-github--light"></span></a></li>
+	<li><a href="https://stackoverflow.com/users/3606603/valignatev" title="stackoverflow"><span class="Social-stackoverflow--light"></span></a></li>
+	<li><a href="https://www.youtube.com/channel/UCg0V1MkdYkMlwZPU3IuKLMg" title="youtube"><span class="Social-youtube--light"></span></a></li>
+	<li><a href="https://twitch.tv/valignatev" title="twitch"><span class="Social-twitch--light"></span></a></li>
+	<li><a href="https://reddit.com/user/valignatev" title="reddit"><span class="Social-reddit--light"></span></a></li>
+	<li><a href="mailto:valentignatev@gmail.com" title="email"><span class="Social-email--light"></span></a></li>
+	</ul>
+    </div>
+    <div class="Footer-attribution">
+      Design by <a
+        target="_blank"
+        href="https://www.behance.net/ignateva"
+      >
+        Ksenia Ignateva
+      </a>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

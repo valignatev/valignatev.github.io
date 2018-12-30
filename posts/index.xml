@@ -7,10 +7,20 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>valentignatev@gmail.com (Valentin Ignatev)</managingEditor>
     <webMaster>valentignatev@gmail.com (Valentin Ignatev)</webMaster>
-    <lastBuildDate>Mon, 24 Dec 2018 01:45:00 +0300</lastBuildDate>
+    <lastBuildDate>Sun, 30 Dec 2018 22:43:00 +0300</lastBuildDate>
     
 	<atom:link href="https://valignatev.com/posts/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How I&#39;m failing literate config in Emacs</title>
+      <link>https://valignatev.com/posts/emacs-org-config/</link>
+      <pubDate>Sun, 30 Dec 2018 22:43:00 +0300</pubDate>
+      <author>valentignatev@gmail.com (Valentin Ignatev)</author>
+      <guid>https://valignatev.com/posts/emacs-org-config/</guid>
+      <description>&lt;p&gt;My personal experience with the literate config style in Emacs as of the
+end of 2018, and why I think I don&#39;t like it.&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Open external terminals from Emacs</title>

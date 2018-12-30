@@ -53,7 +53,7 @@ their live demos. Well, enough is enough!</p>
 
 <h2 id="the-disclaimer">The disclaimer</h2>
 
-<p>GUI only. If you&rsquo;re using the terminal version of Emacs, use font changing
+<p>GUI only. If you're using the terminal version of Emacs, use font changing
 features it provides. To skip to the end version click <a href="#whole-code-together">TLDR</a>.</p>
 
 <h2 id="the-problem">The problem</h2>
@@ -68,11 +68,11 @@ features it provides. To skip to the end version click <a href="#whole-code-toge
 </a>
 
 
-<p>So you&rsquo;re doing a live demo. Or it&rsquo;s a middle of the night, and your
+<p>So you're doing a live demo. Or it's a middle of the night, and your
 eyes are a bit tired. In any case, you want to make the font size a bit bigger.
 You hit <kbd>C-x</kbd> <kbd>C-+</kbd> couple of times, your text
 increases, but the minibuffer stays
-small. And other windows stay small as well. Just one last <a href="https://youtu.be/6INMXmsCCC8?t=1298" title="The pain is real" target="_blank">example</a> I&rsquo;ve encountered recently.</p>
+small. And other windows stay small as well. Just one last <a href="https://youtu.be/6INMXmsCCC8?t=1298" title="The pain is real" target="_blank">example</a> I've encountered recently.</p>
 
 <h2 id="what-we-can-do-about-it">What we can do about it</h2>
 
@@ -85,36 +85,36 @@ shows four ways. It also says us to add this line to our <code>init.el</code>:</
 <span class="c1">;; expressed in whatever way Emacs understands</span>
 <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;default-frame-alist</span>
              <span class="o">&#39;</span><span class="p">(</span><span class="nv">font</span> <span class="o">.</span> <span class="s">&#34;DejaVu Sans Mono-10&#34;</span><span class="p">))</span></code></pre></div>
-<p>Really? It isn&rsquo;t friendly at all, even for an Emacs user. Also, the
-font size is a part of the string, not a number, which isn&rsquo;t helpful at
+<p>Really? It isn't friendly at all, even for an Emacs user. Also, the
+font size is a part of the string, not a number, which isn't helpful at
 all. However, if you do add this line and restart your Emacs (or if
-you create a new frame <sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> with <code>M-x new-frame</code>), you&rsquo;ll notice that it
-indeed displays everything with the font you&rsquo;ve specified in this
+you create a new frame <sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> with <code>M-x new-frame</code>), you'll notice that it
+indeed displays everything with the font you've specified in this
 line. Including the modeline and minibuffer parts which is precisely
 what we need.</p>
 
 <p>Next step is to figure out how to set default font
 interactively. <a href="https://www.emacswiki.org/emacs/SetFonts#toc2" target="_blank">EmacsWiki</a>
 suggest us to use <code>set-frame-font</code> which accepts the font name in the
-same bizarre string format. Let&rsquo;s customize it a bit so we can
-increase, decrease and reset the font size. We&rsquo;ll see if we can
+same bizarre string format. Let's customize it a bit so we can
+increase, decrease and reset the font size. We'll see if we can
 reduce the pain.</p>
 
 <h2 id="the-solution">The solution</h2>
 
-<p>First, let&rsquo;s define font name and size separately:</p>
+<p>First, let's define font name and size separately:</p>
 <div class="highlight"><pre class="chroma"><code class="language-elisp" data-lang="elisp"><span class="p">(</span><span class="nb">setq</span> <span class="nv">my-font-name</span> <span class="s">&#34;monospaced&#34;</span><span class="p">)</span>
 <span class="p">(</span><span class="nb">defcustom</span> <span class="nv">my-font-size</span> <span class="mi">12</span> <span class="s">&#34;My font size&#34;</span><span class="p">)</span></code></pre></div>
-<p>We&rsquo;ll be abusing Emacs <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Variable-Definitions.html" target="_blank">custom
+<p>We'll be abusing Emacs <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Variable-Definitions.html" target="_blank">custom
 variables</a>
 so we can get both current and default font sizes. Without <code>defcustom</code>
-we&rsquo;d have to introduce another variable, something like
+we'd have to introduce another variable, something like
 <code>my-current-font-size</code>. Which is possible but less convenient.</p>
 
 <p>Now we can call <code>set-frame-font</code> by formatting variables together:</p>
 <div class="highlight"><pre class="chroma"><code class="language-elisp" data-lang="elisp"><span class="p">(</span><span class="nv">set-frame-font</span>
   <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;%s %d&#34;</span> <span class="nv">my-font-name</span> <span class="nv">my-font-size</span><span class="p">)</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)</span></code></pre></div>
-<p>Let&rsquo;s turn it into a function which accepts the font size and sets it:</p>
+<p>Let's turn it into a function which accepts the font size and sets it:</p>
 <div class="highlight"><pre class="chroma"><code class="language-elisp" data-lang="elisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">set-frame-font-size</span> <span class="p">(</span><span class="kp">&amp;optional</span> <span class="nv">font-size</span><span class="p">)</span>
   <span class="p">(</span><span class="nb">let</span> <span class="p">((</span><span class="nv">font-size</span>
      <span class="p">(</span><span class="nb">or</span> <span class="nv">font-size</span>
@@ -122,7 +122,7 @@ we&rsquo;d have to introduce another variable, something like
     <span class="p">(</span><span class="nv">customize-set-variable</span> <span class="ss">&#39;my-font-size</span> <span class="nv">font-size</span><span class="p">)</span>
     <span class="p">(</span><span class="nv">set-frame-font</span>
      <span class="p">(</span><span class="nf">format</span> <span class="s">&#34;%s %d&#34;</span> <span class="nv">my-font-name</span> <span class="nv">font-size</span><span class="p">)</span> <span class="no">nil</span> <span class="no">t</span><span class="p">)))</span></code></pre></div>
-<p>Notice that <code>font-size</code> is optional. If it&rsquo;s not provided, we drop the
+<p>Notice that <code>font-size</code> is optional. If it's not provided, we drop the
 font size to the default value of <code>my-font-size</code>. Here Emacs
 customization feature comes in handy because it remembers original
 value. <code>(car (get 'my-font-size 'standard-value))</code> does exactly this -
@@ -133,7 +133,7 @@ it gets the original value of the <code>my-font-size</code>.</p>
 <code>set-frame-font</code> with this number. Now we can call the function as
 both <code>(set-frame-font-size NUMBER)</code> and <code>(set-frame-font-size)</code>.</p>
 
-<p>Now we&rsquo;ll use this function as a foundation for an increase, decrease and
+<p>Now we'll use this function as a foundation for an increase, decrease and
 reset the font size functions:</p>
 <div class="highlight"><pre class="chroma"><code class="language-elisp" data-lang="elisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">increase-frame-font</span> <span class="p">()</span>
   <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
@@ -149,7 +149,7 @@ reset the font size functions:</p>
 <p>Note the <code>(interactive)</code>, so we can call these functions with <code>M-x</code>
 like <code>M-x increase-frame-font</code> and bind them to keyboard shortcuts.
 We also can remap builtins <code>text-scale-increase</code>, <code>text-scale-decrease</code>
-and <code>text-scale-adjust</code> with our new functions. I&rsquo;ll leave this as an
+and <code>text-scale-adjust</code> with our new functions. I'll leave this as an
 exercise for you.</p>
 
 <h2 id="whole-code-together">Whole code together</h2>
@@ -183,7 +183,7 @@ exercise for you.</p>
   <span class="s">&#34;Reset frame font to its default value.&#34;</span>
   <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
   <span class="p">(</span><span class="nv">set-frame-font-size</span><span class="p">))</span></code></pre></div>
-<p>I hope you&rsquo;ve got the idea, and maybe you&rsquo;ve even learned something
+<p>I hope you've got the idea, and maybe you've even learned something
 new about Emacs and elisp (I did). This is not the only way
 of achieving the purpose of this post (it is definitely not the most
 universal one). Emacs is indefinitely flexible (sometimes at the cost
